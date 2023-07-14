@@ -13,12 +13,13 @@ export class TaskFormComponent implements OnInit {
   isCompleted: boolean = false
   errorMessage: any;
   name: any;
+  Assigent_employeename!: string;
 
   constructor(private fb: FormBuilder, private taskService: TaskService) {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      employeename: ['', Validators.required],
+      Assigent_employeename: ['', Validators.required],
       completed:['', Validators.required],
       timestamp:['', Validators.required]
     });
@@ -31,8 +32,16 @@ export class TaskFormComponent implements OnInit {
         console.log("nameeeeeeeeeeeeeeeee",data)
       });
   }
+  taskName!: string;
+  taskDescription!: string;
+  taskScheduleTime!: string;
+
+  scheduleTask() {
+    console.log('Task scheduled:', this.taskName, this.taskDescription, this.taskScheduleTime);
+  }
 
   onSubmit(): void {
+    console.log("fffffffff",this.taskForm.value)
     if (this.taskForm.valid) {
       const task: any = {
         id_task: Date.now(),
@@ -40,10 +49,12 @@ export class TaskFormComponent implements OnInit {
         description: this.taskForm.value.description,
         completed: this.isCompleted,
         timestamp: this.taskForm.value.timestamp,
-        Assigent_employeename: this.taskForm.value.timestamp
+        Assigent_employeename: this.taskForm.value.Assigent_employeename
       };
-      this.taskService.addTask(task).subscribe(
+      // consol
+      this.taskService.addTask(this.taskForm.value).subscribe(
         data => {
+          console.log("ddddddddddddddd",data)
         });
       // this.taskService.addTask(task);
       // this.taskForm.reset();

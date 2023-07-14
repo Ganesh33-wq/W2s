@@ -163,3 +163,16 @@ class dash_user_count(APIView):
             count = User.objects.filter(role=value['role']).count()
             count_list.append({"Role": value['role'], 'count': count})
         return Response(count_list)
+    
+
+class sheculeTASK(APIView):
+    serializer_class = TaskSerializer
+    permission_classes = (AllowAny, )
+
+    def get(self,request):
+        email = request.GET.get('email')
+        print("rrrrrrrrrrr",email)
+        task_list = Task.objects.filter(Assigent_employeename=str(email)).last()
+        print("fffffffffffffffffffff",task_list)
+        serializer = TaskSerializer(task_list, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

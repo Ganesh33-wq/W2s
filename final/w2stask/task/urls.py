@@ -15,5 +15,7 @@ urlpatterns = [
     path('emp_name/', emp_name.as_view(), name='emp_name'),
     path('emp_uni_task/', emp_uni_task.as_view(), name='emp_uni_task'),
     path('dash_user_count/', dash_user_count.as_view(), name='dash_user_count'),
+    path('sheculeTASK/', sheculeTASK.as_view(), name='sheculeTASK'),
+
 
 ]

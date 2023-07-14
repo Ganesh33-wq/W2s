@@ -33,6 +33,13 @@ export class TaskService {
     .set('email', email);
     return this.http.get(AUTH_API +'emp_uni_task/',{ params });
   }
+
+  getNotifications(email:any): Observable<any> {
+    const params = new HttpParams()
+    .set('email', email);
+    return this.http.get(AUTH_API +'sheculeTASK/',{ params });
+  }
+
   addTask(task:Task): Observable<any> {
     return this.http.post(AUTH_API +'Task_get_post/',task);
   }
